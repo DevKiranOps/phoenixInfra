@@ -6,10 +6,10 @@ resource "random_string" "random" {
 
 
 resource "aws_s3_bucket" "mys3" {
-  bucket = "phoenix-s3-${random_string.random.id}"
+  bucket = "${var.prefix}-s3-${random_string.random.id}"
 
   tags = {
-    Environment = "Test"
-    Project     = "phoenix"
+    Environment =  var.env
+    Project     = var.project
   }
 }
