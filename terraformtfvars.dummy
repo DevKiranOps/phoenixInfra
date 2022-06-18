@@ -1,0 +1,5 @@
+# Please rename this file as terraform.tfvars and update your desired values.
+perfix=""
+env=""
+project = ""
+vpcCidr = ""

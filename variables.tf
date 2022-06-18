@@ -9,10 +9,11 @@ variable "prefix" {
 
 variable "env" {
     type =  string
-    default = "Test"
+    
     description = "Environment to which the resource belong to"
   
 }
+
 variable "project" {
     type = string 
     default = "Phoenix-I"
