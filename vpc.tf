@@ -36,11 +36,10 @@ resource "aws_subnet" "private" {
 
 }
 
-
 resource "aws_subnet" "web" {
   vpc_id     = aws_vpc.myvpc.id
   cidr_block = "10.100.3.0/24"
-
+  depends_on = [aws_subnet.public] 
   tags = {
     Name        = "${var.prefix}-websubnet"
     Environment =  var.env
