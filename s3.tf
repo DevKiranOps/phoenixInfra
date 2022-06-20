@@ -9,7 +9,11 @@ resource "aws_s3_bucket" "mys3" {
   bucket = "${var.prefix}-s3-${random_string.random.id}"
 
   tags = {
-    Environment =  var.env
+    Environment = var.env
     Project     = var.project
   }
+}
+
+output "s3_bucket_name" {
+  value = aws_s3_bucket.mys3.bucket
 }
