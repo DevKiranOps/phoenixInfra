@@ -1,12 +1,13 @@
 # Please rename this file as terraform.tfvars and update your desired values.
-region   = ""
-prefix   = ""
-env      = ""
-project  = ""
-vpcCidr           = ""
-privateSubnetCidr = ""
-pubSubnetCidr     = ""
-webSubnetCidr     = ""
-sourceip          = ""
+region            = ""
+prefix            = ""
+env               = ""
+project           = ""
+vpcCidr           = "10.100.0.0/18"
+privateSubnetCidr = "10.100.15.0/24"
+ pubSubnetCidr     = ["10.100.1.0/24","10.100.2.0/24", "10.100.3.0/24", "10.100.4.0/24", "10.100.5.0/24", "10.100.6.0/24", "10.100.7.0/24"]
+webSubnetCidr     = "10.100.10.0/24"
+sourceip          = "106.220.118.246/32"
 webInstanceSize   = "t2.small"
 publicKeyPath     = ""
+web_nodes = 5

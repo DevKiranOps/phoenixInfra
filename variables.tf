@@ -33,7 +33,7 @@ variable "project" {
 
 variable "vpcCidr" {
   type        = string
-  default     = "10.100.0.0/20"
+  default     = "10.100.0.0/18"
   description = "CIDR Range for the VPC"
 
 }
@@ -49,28 +49,33 @@ variable "sourceip" {
 
 variable "privateSubnetCidr" {
   type          = string
-  default       = "10.100.5.0/24"
-  dedescription = "CIDR for the private subnet"
+  default       = "10.100.12.0/24"
+  description = "CIDR for the private subnet"
 
 }
 
 
 variable "pubSubnetCidr" {
-  type          = string
-  default       = "10.100.1.0/24"
-  dedescription = "CIDR for the Public subnet"
+  type          = list(string)
+  default       = ["10.100.1.0/24","10.100.2.0/24", "10.100.3.0/24", "10.100.4.0/24", "10.100.5.0/24", "10.100.6.0/24", "10.100.7.0/24"]
+  description = "CIDR for the Public subnet"
 
 }
 
 variable "webSubnetCidr" {
   type          = string
-  default       = "10.100.3.0/24"
-  dedescription = "CIDR for the Web ssubnet"
+  default       = "10.100.10.0/24"
+  description = "CIDR for the Web ssubnet"
 
 }
 
 
 # ec2 variables
+
+variable "web_nodes" {
+  type = number
+  description = "number of desired web instances"
+}
 
 variable "publicKeyPath" {
   type        = string
