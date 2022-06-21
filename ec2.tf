@@ -22,22 +22,25 @@ data "aws_ami" "myubuntu" {
 
   owners = ["099720109477"] # Canonical
 }
-
+  
 resource "aws_network_interface" "web" {
-  subnet_id = aws_subnet.web.id
-
+  count = var.web_nodes
+  subnet_id = element(aws_subnet.public.*.id, count.index)
   security_groups = [aws_security_group.web.id]
 
 }
 
+
+
 resource "aws_instance" "web" {
+  count = var.web_nodes
   ami                         = data.aws_ami.myubuntu.id
   instance_type               = var.webInstanceSize
   key_name                    = aws_key_pair.mainkey.key_name
   user_data                   = base64encode(data.template_file.web_userdata.rendered)
   user_data_replace_on_change = true
   network_interface {
-    network_interface_id = aws_network_interface.web.id
+    network_interface_id = element(aws_network_interface.web.*.id, count.index)
     device_index         = 0
   }
 
@@ -45,14 +48,14 @@ resource "aws_instance" "web" {
     cpu_credits = "unlimited"
   }
   tags = {
-    Name        = "${var.prefix}-web"
+    Name        = "${var.prefix}-web-${count.index}"
     Environment = var.env
     Project     = var.project
   }
 }
 
 
-output "ec2_public_ip" {
-  value = aws_instance.web.public_ip
+# output "ec2_public_ip" {
+#   value = aws_instance.web.public_ip
 
-}
+# }
